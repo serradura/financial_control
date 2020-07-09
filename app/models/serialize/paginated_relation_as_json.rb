@@ -4,10 +4,10 @@ module Serialize
     attribute :serializer
 
     validates :relation, kind: ActiveRecord::Relation
-    validates :serializer, kind: { respond_to: :collection_as_json }
+    validates :serializer, kind: { respond_to: :as_json }
 
     def call!
-      data = serializer.collection_as_json(relation)
+      data = relation.map { |record| serializer.as_json(record) }
 
       paginatable = {
         current_page: relation.current_page,
