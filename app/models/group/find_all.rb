@@ -1,4 +1,4 @@
-class Group::Fetch < Micro::Case
+class Group::FindAll < Micro::Case
   attributes :user, :params
 
   validates :user, kind: User

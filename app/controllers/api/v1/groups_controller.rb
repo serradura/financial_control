@@ -1,6 +1,6 @@
 class Api::V1::GroupsController < ApplicationController
   def index
-    Group::Fetch
+    Group::FindAll
       .call(user: current_user, params: params)
       .then { |result| use_scopes(result) }
       .then(Group::Paginatable)
