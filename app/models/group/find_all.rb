@@ -11,7 +11,7 @@ class Group
           .where(user_id: user.id)
           .order(active: :desc, name: :asc)
 
-      Success { { data: groups } }
+      Success { { relation: groups } }
     end
   end
 end

@@ -5,7 +5,7 @@ class Api::V1::GroupsController < ApplicationController
       .then(Group::FilterByParams)
       .then(Paginate)
       .then(Serialize::PaginatedRelationAsJson, serializer: Group::Serialize)
-      .on_success { |result| render_json(200, result[:data]) }
+      .on_success { |result| render_json(200, result) }
   end
 
   def show
