@@ -6,8 +6,6 @@ class Group < ApplicationRecord
   validates :name, presence: true
   validates :name, uniqueness: { scope: :user }
 
-  scope :active, -> { where(active: true) }
-
   def description
     name
   end
