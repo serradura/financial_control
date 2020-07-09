@@ -1,15 +1,15 @@
 class Group
   class FilterByParams < Micro::Case
-    attributes :relation, :params
+    attributes :data, :params
 
     validates :params, kind: ActionController::Parameters
-    validates :relation, kind: ActiveRecord::Relation
+    validates :data, kind: ActiveRecord::Relation
 
     def call!
       filter_as_json = params[:filter] || '{}'
       filter = JSON.parse(filter_as_json).with_indifferent_access
 
-      filtered_relation = filter_by_name(relation, filter)
+      filtered_relation = filter_by_name(data, filter)
       filtered_relation = filter_by_active(filtered_relation, filter)
 
       Success { { data: filtered_relation } }

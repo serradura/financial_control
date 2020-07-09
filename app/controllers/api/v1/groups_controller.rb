@@ -3,7 +3,7 @@ class Api::V1::GroupsController < ApplicationController
     Group::FindAll
       .call(user: current_user, params: params)
       .then(Group::FilterByParams)
-      .then(Group::Paginatable)
+      .then(Paginate, serializer: Group::Serialize)
       .on_success { |result| render_json(200, result[:data]) }
   end
 
