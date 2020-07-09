@@ -2,7 +2,7 @@ class Api::V1::GroupsController < ApplicationController
   def index
     Group::FindAll
       .call(user: current_user, params: params)
-      .then { |result| use_scopes(result) }
+      .then(Group::FilterByParams)
       .then(Group::Paginatable)
       .on_success { |result| render_json(200, result[:data]) }
   end
